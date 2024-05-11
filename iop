@@ -1,0 +1,24 @@
+/** 
+   * see BillingManager#getBillingInfos(BillingInfo[]) 
+   */ 
+  public BillingInfo[]  
+    getBillingInfos(BillingInfo[] inBillingInfos)  
+    throws BillingException 
+  { 
+      for (int index = 0; index < inBillingInfos.length; index++) 
+    { 
+      // Set IsAuthorizeNeeded flag 
+      inBillingInfos[index].setAuthorizeNeeded(true); 
+    } 
+ 
+    if (GET_BILLING_INFOS_RESPONSE == NULL) 
+      return null; 
+ 
+    if (GET_BILLING_INFOS_RESPONSE == EXCEPTION) 
+      throw new NullPointerException("Testing Null Pointer"); 
+ 
+    if (GET_BILLING_INFOS_RESPONSE == BILLING_EXCEPTION) 
+      throw new BillingException("Testing Billing Exception"); 
+ 
+    return inBillingInfos; 
+  } 
