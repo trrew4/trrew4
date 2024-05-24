@@ -1,0 +1,63 @@
+# -*- coding:utf-8 -*-
+from __future__ import unicode_literals
+from wxpy import *
+from requests import get
+from requests import post
+from platform import system
+from os import chdir
+from random import choice
+from threading import Thread
+import configparser
+import time
+import sys
+
+
+# 获取每日励志精句
+def get_message():
+    r = get("http://open.iciba.com/dsapi/")
+    note = r.json()['note']
+    content = r.json()['content']
+    return note,content
+
+
+# 发送消息给她
+def send_message(your_message):
+    try:
+        # 对方的微信名称
+        my_friend = bot.friends().search(my_lady_wechat_name)[0]
+
+        # 发送消息给对方
+        my_friend.send(your_message)
+    except:
+
+        # 出问题时，发送信息到文件传输助手
+        bot.file_helper.send(u"守护女友出问题了，赶紧去看看咋回事~")
+
+
+
+# 在规定时间内进行关心她操作
+def start_care():
+
+    # 待发送的内容，先置为空
+    message = ""
+
+    # 来个死循环，24小时关心她
+    while(True):
+
+        # 提示
+        print("守护中，时间:%s"% time.ctime())
+
+
+        # 每天定时问候，早上起床，中午吃饭，晚上吃饭，晚上睡觉
+        # 获取时间，只获取时和分，对应的位置为倒数第13位到倒数第8位
+        now_time = time.ctime()[-13:-8]
+        if (now_time == say_good_morning):
+            # 随机取一句问候语
+            message = choice(str_list_good_morning)
+
+            # 是否加上随机表情
+            if(flag_wx_emoj):
+                message = message + choice(str_list_emoj)
+
+            send_message(message)
+            print("提醒女友早上起床:%s" % time.ctime())
