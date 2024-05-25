@@ -1,0 +1,10 @@
+hot_searches = []
+for item in soup.find_all('div', {'class': 'c-single-text-ellipsis'}):
+    hot_searches.append(item.text)
+
+workbook = openpyxl.Workbook()
+sheet = workbook.active
+sheet.title = 'Baidu Hot Searches'
+
+for i in range(len(hot_searches)):
+    sheet.cell(row=i+2, column=1, value=hot_searches[i])
