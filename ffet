@@ -1,0 +1,103 @@
+
+
+    <!--表格-->
+    <template>
+        <el-table
+                :data="tableData"
+                style="width: 100%"
+                :row-class-name="tableRowClassName"
+                @selection-change="handleSelectionChange">
+            <el-table-column
+                    type="selection"
+                    width="55">
+            </el-table-column>
+            <el-table-column
+                    type="index"
+                    width="50">
+            </el-table-column>
+
+            <el-table-column
+                    prop="brandName"
+                    label="品牌名称"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="companyName"
+                    label="企业名称"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="ordered"
+                    align="center"
+                    label="排序">
+            </el-table-column>
+            <el-table-column
+                    prop="statusStr"
+                    align="center"
+                    label="当前状态">
+            </el-table-column>
+
+            <el-table-column
+                    align="center"
+                    label="操作">
+                <template slot-scope="scope">
+                        <el-button type="primary" plain @click="updateById(scope.$index, scope.row)">修改</el-button>
+                        <el-button type="danger" plain @click="deleteById(scope.$index, scope.row)">删除</el-button>
+                    <!--修改数据的对话框表单-->
+                    <el-dialog
+                            title="修改品牌信息"
+                            :visible.sync="centerVisible"
+                            width="30%"
+                    >
+                        <el-form ref="form" :model=" brand" label-width="80px">
+                            <el-form-item label="品牌名称">
+                                <el-input v-model=" brand.brandName"></el-input>
+                            </el-form-item>
+                            <el-form-item label="企业名称">
+                                <el-input v-model=" brand.companyName"></el-input>
+                            </el-form-item>
+                            <el-form-item label="排序">
+                                <el-input v-model=" brand.ordered"></el-input>
+                            </el-form-item>
+                            <el-form-item label="备注">
+                                <el-input type="textarea" v-model=" brand.description"></el-input>
+                            </el-form-item>
+                            <el-form-item label="状态">
+                                <el-switch v-model=" brand.status"
+                                           active-text="启用"
+                                           inactive-text="禁用"
+                                           active-value="1"
+                                           inactive-value="0">
+                                </el-switch>
+                            </el-form-item>
+
+                            <el-form-item>
+                                <el-button type="primary" @click="edit">提交</el-button>
+                                <el-button @click="centerVisible = false">取消</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </el-dialog>
+
+                </template>
+
+            </el-table-column>
+
+        </el-table>
+    </template>
+
+    <!--分页工具条-->
+    <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[5, 10, 15, 20]"
+            :page-size="5"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="totalCount">
+    </el-pagination>
+
+</div>
+
+
