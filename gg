@@ -1,0 +1,39 @@
+public void backUp() {
+    String osName = System.getProperty("os.name");
+    String directoryPath;
+    // 更精确的时间戳作为前缀
+    String backupFileNamePrefix = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    String backupFileName = backupFileNamePrefix + "_" + BACKUP_FILE;
+
+    if (osName.startsWith("Windows")) {
+        directoryPath = BACKUP_WIN_DIR;
+    } else {
+        directoryPath = BACKUP_LINUX_DIR;
+    }
+
+    // 检查文件夹是否存在，如果不存在则创建
+    File directory = new File(directoryPath);
+    if (!directory.exists()) {
+        directory.mkdirs();
+    }
+
+    // 获取文件夹中的所有文件
+    File[] files = directory.listFiles();
+    if (files != null && files.length >= LIMIT_LENGTH) {
+        // 根据最后修改时间对文件进行排序
+        Arrays.sort(files, Comparator.comparingLong(File::lastModified));
+
+        // 删除最早的文件（即排序后的第一个文件）
+        for (File file : files) {
+            if (!file.isDirectory()) {
+                file.delete();
+                break; // 只删除一个文件
+            }
+        }
+    }
+
+    String filePath = directoryPath + File.separator + backupFileName;
+
+    // 执行实际的备份操作
+    // ...
+}
