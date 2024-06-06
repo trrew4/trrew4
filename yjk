@@ -1,0 +1,52 @@
+Page({
+  data: {
+    isPlayingMusic:false,
+    bgm:null,
+    music_url:"https://nf-sycdn.kuwo.cn/523a03e11876357f6d600598a2609ee2/6640cb27/resource/n2/32/26/1627466358.mp3?from=vip",
+    music_coverImgUrl:"image/banner.jpg",
+    onReady:function(){
+        // 创建getBackgroundAudioManager 实例对象(接口播放音频)
+        this.bgm=wx.getBackgroundAudioManager()
+        // 音频标题
+        this.bgm.title = "marry me"
+        // 专辑封面
+        this.bgm.epname = "wedding"
+        // 歌手名
+        this.bgm.singer = "singer"
+        // 专辑封面
+        this.bgm.coverImgUrl = this.music_coverImgUrl
+        this.bgmoncanplay(()=>{
+            this.bgm.pause()
+        })
+        // 指定音频的数据源
+        this.bgm.src = this.music_url
+    }
+  },  
+    // 播放器的单击事件
+  play:function(e){
+    // 执行暂停或播放操作,如果值为true则暂停，值为 false则播放
+    if(this.data.isPlayingMusic){
+      this.bgm.pause()
+    }else{
+      this.bgm.play()
+    }
+    this.setData({
+        //将data中的isPlayingMusic赋值给它
+      isPlayingMusic: !this.data.isPlayingMusic
+    })
+  },
+  //实现拨打电话功能
+  callGroom:function(){
+    wx.makePhoneCall({
+      phoneNumber: '15138726924',
+    })
+  },
+  callBride:function(){
+    wx.makePhoneCall({
+      phoneNumber: '18236347304',
+    })
+  },
+
+})
+
+
