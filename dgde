@@ -1,0 +1,18 @@
+uni.request({
+  url: '后端接口地址,获取支付核心数据',
+  method: 'POST',
+  data: { 传入接口需要的参数,如订单ID,openId等 },
+  success(res) {
+    //调用下方支付方法
+    wxpay（res.data）
+    console.log(res.data)
+    //接口会返回以下核心参数
+    //appId     公众号ID
+    //timeStamp 时间戳
+    //nonceStr  随机字符串
+    //package   统一下单接口返回的 prepay_id 参数值
+    //signType  微信签名方式RSA
+    //paySign   微信签名
+    
+  }
+})
