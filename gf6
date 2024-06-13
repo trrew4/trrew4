@@ -1,0 +1,27 @@
+.box{ height:300px;
+width: 1024px;
+margin: 0 auto;
+margin-bottom:10px;}
+.inner{
+	width: 1024px;
+	height: 300px;
+	position: relative;
+	overflow: hidden;
+        }
+        .inner img{
+            width:1024px;
+            height: 300px;
+            vertical-align: top
+        }
+           .inner ul {
+            width: 1000%;
+            position: absolute;
+            list-style: none;
+            left:0;
+            top: 0;
+        }
+    .inner  li{
+            float: left;
+ 
+        }
+ 
