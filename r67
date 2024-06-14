@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>功能大厅</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+ 
+        .container {
+            text-align: center;
+        }
+ 
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+ 
+        .button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>学生成绩管理系统</h1>
+        <a href="./gradeList" class="button" id="gradeManagementBtn">成绩管理</a>
+        <a href="./sa" class="button" id="subjectAnalysisBtn">学科分析</a>
+    </div>
+</body>
+</html>
