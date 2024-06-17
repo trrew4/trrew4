@@ -1,0 +1,35 @@
+ def center_window(self, root, w, h):
+        """
+        窗口居于屏幕中央
+        :param root: root
+        :param w: 窗口宽度
+        :param h: 窗口高度
+        :return:
+        """
+        # 获取屏幕 宽、高
+        ws = root.winfo_screenwidth()
+        hs = root.winfo_screenheight()
+
+        # 计算 x, y 位置
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+
+        root.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    def clear_tree(self, tree):
+        '''
+        清空表格
+        '''
+        x = tree.get_children()
+        for item in x:
+            tree.delete(item)
+
+    def add_tree(self,list, tree):
+        '''
+        新增数据到表格
+        '''
+        i = 0
+        for subList in list:
+            tree.insert('', 'end', values=subList)
+            i = i + 1
+        tree.grid()
