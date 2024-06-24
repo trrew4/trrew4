@@ -1,0 +1,43 @@
+    // 判断房间是否存在
+    if (!room_id) {
+      resMsg("房间id不能为空", 400);
+      return;
+    }
+
+    let room = await ImRoom({ _id: room_id, status: "1" });
+    if (!room) {
+      resMsg("房间未开放", 400);
+      return;
+    }
+
+    if (!content) {
+      resMsg("消息内容不能为空", 400);
+      return;
+    }
+
+    // 保存消息
+    let params = {
+      im_room_id: room_id,
+      author_id: author_id,
+      content: content,
+      msg_type,
+      created_time: getCurrentTimer(),
+      updated_time: getCurrentTimer(),
+    };
+
+    if (time) {
+      params.time = time;
+    }
+
+    if (msg_type == 4) {
+      if (poster) {
+        params.poster = poster;
+      }
+      if (video_width) {
+        params.video_width = video_width;
+      }
+      if (video_height) {
+        params.video_height = video_height;
+      }
+    }
+
