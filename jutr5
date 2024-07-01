@@ -1,0 +1,39 @@
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    vWidget[1]->setGeometry(0, this->height() - 80, this->width(), 80);
+}
+ 
+void MainWindow::btn_play_clicked()
+{
+    int state = videoPlayer->state();
+    switch (state) {
+    case QMediaPlayer::StoppedState:
+        /* 媒体播放 */
+        videoPlayer->play();
+        break;
+ 
+    case QMediaPlayer::PlayingState:
+        /* 媒体暂停 */
+        videoPlayer->pause();
+        break;
+ 
+    case QMediaPlayer::PausedState:
+        /* 设置视频输出窗口 */
+        videoPlayer->play();
+        break;
+    }
+}
+ 
+void MainWindow::btn_next_clicked()
+{
+    videoPlayer->stop();
+    int count = mediaPlaylist->mediaCount();
+    if (0 == count)
+        return;
+ 
+    /* 列表下一个 */
+    mediaPlaylist->next();
+    videoPlayer->play();
+}
+ 
